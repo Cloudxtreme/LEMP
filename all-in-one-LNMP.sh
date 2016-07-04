@@ -28,12 +28,15 @@ fi
 check
 }
 check_user() {
-if ! grep -q mysql /etc/passwd
-then
-    useradd -r -g mysql -s /bin/false mysql
-else
-    echo "mysql user already exists"
-fi
+for user in mysql php-fpm
+do
+    if ! grep -q $user /etc/passwd
+    then
+        useradd -r -g $user -s /bin/false $user
+    else
+        echo "$user user already exists"
+    fi
+done
 check
 }
 
@@ -112,7 +115,7 @@ check_swap
 cd /usr/local/src/
 [ ! -f php-5.6.21.tar.gz ] && wget https://php.net/distributions/php-5.6.21.tar.gz
 tar -xzvf php-5.6.21.tar.gz && cd php-5.6.21
-./configure --prefix=/usr/local/php --with-apxs2=/usr/local/apache2/bin/apxs --with-config-file-path=/usr/local/php/etc --with-mysql=/usr/local/mysql --with-mysql-sock=/tmp/mysql.sock --with-bz2 --with-libxml-dir --with-gd --with-jpeg-dir --with-png-dir --with-freetype-dir --with-iconv-dir --with-zlib-dir --with-mcrypt --with-curl --with-openssl --with-pear --enable-exif --enable-gd-native-ttf --enable-mbstring --enable-soap --enable-sockets
+./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-mysql=/usr/local/mysql --with-mysql-sock=/tmp/mysql.sock --enable-fpm --with-fpm-user=php-fpm --with-fpm-group=php-fpm --with-bz2 --with-libxml-dir --with-gd --with-jpeg-dir --with-png-dir --with-freetype-dir --with-iconv-dir --with-zlib-dir --with-mcrypt --with-curl --with-openssl --with-pear --enable-exif --enable-gd-native-ttf --enable-mbstring --enable-soap --enable-sockets
 make && make install
 cp php.ini-production /usr/local/php/etc/php.ini
 check
