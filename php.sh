@@ -17,7 +17,7 @@ check_src() {
 cd /usr/local/src/
 if [ ! -f php-5.6.21.tar.gz ]
 then
-    wget http://php.net/distributions/php-5.6.21.tar.gz
+    wget https://php.net/distributions/php-5.6.21.tar.gz
 fi
 tar -xzvf php-5.6.21.tar.gz
 }
@@ -45,5 +45,7 @@ cd /usr/local/src/php-5.6.21
 ./configure --prefix=/usr/local/php --with-apxs2=/usr/local/apache2/bin/apxs --with-config-file-path=/usr/local/php/etc --with-mysql=/usr/local/mysql --with-mysql-sock=/tmp/mysql.sock --enable-fpm --with-fpm-user=php-fpm --with-fpm-group=php-fpm --with-bz2 --with-libxml-dir --with-gd --with-jpeg-dir --with-png-dir --with-freetype-dir --with-iconv-dir --with-zlib-dir --with-mcrypt --with-curl --with-openssl --with-pear --enable-exif --enable-gd-native-ttf --enable-mbstring --enable-soap --enable-sockets
 make && make install
 cp php.ini-production /usr/local/php/etc/php.ini
-cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf
+# cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf
+curl https://raw.githubusercontent.com/cxuuu/LNMP/master/src/php-fpm.conf /usr/local/php/etc/php-fpm.conf
 cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
+chkconfig --add php-fpm

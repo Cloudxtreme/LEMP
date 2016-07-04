@@ -9,3 +9,5 @@ tar -xzvf nginx-1.8.1.tar.gz && cd nginx-1.8.1
 
 curl https://raw.githubusercontent.com/cxuuu/LNMP/master/src/nginx -o /etc/init.d/nginx
 curl https://raw.githubusercontent.com/cxuuu/LNMP/master/src/nginx.conf -o /usr/local/nginx/conf/nginx.conf
+
+chkconfig --add nginx
