@@ -126,6 +126,7 @@ make && make install
 curl https://raw.githubusercontent.com/cxuuu/LNMP/master/src/nginx -o /etc/init.d/nginx
 chmod a+x /etc/init.d/nginx
 curl https://raw.githubusercontent.com/cxuuu/LNMP/master/src/nginx.conf -o /usr/local/nginx/conf/nginx.conf
+echo -e "<?php\nphpinfo();\n?>" > /usr/local/nginx/html/index.php
 mkdir /usr/local/nginx/vhosts
 chkconfig --add nginx
 check
