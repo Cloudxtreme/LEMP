@@ -127,7 +127,7 @@ curl https://raw.githubusercontent.com/cxuuu/LNMP/master/src/nginx -o /etc/init.
 chmod a+x /etc/init.d/nginx
 curl https://raw.githubusercontent.com/cxuuu/LNMP/master/src/nginx.conf -o /usr/local/nginx/conf/nginx.conf
 echo -e "<?php\nphpinfo();\n?>" > /usr/local/nginx/html/index.php
-mkdir /usr/local/nginx/vhosts
+mkdir /usr/local/nginx/conf/vhosts
 chkconfig --add nginx
 check
 }
