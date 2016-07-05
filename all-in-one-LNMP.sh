@@ -17,29 +17,8 @@ then
 fi
 }
 
-# functions for mysql
-check_group() {
-if ! grep -q mysql /etc/group
-then
-    groupadd mysql
-else
-    echo "mysql group already exists"
-fi
-check
-}
-check_user() {
-for user in mysql php-fpm
-do
-    if ! grep -q $user /etc/passwd
-    then
-        useradd -r -g $user -s /bin/false $user
-    else
-        echo "$user user already exists"
-    fi
-done
-check
-}
 
+# functions for mysql
 check_mysqlpath() {
 if env|grep PATH|grep -q /usr/local/mysql
 then
@@ -64,6 +43,18 @@ check
 
 
 # common functions
+check_user() {
+for user in mysql php-fpm
+do
+    if ! grep -q $user /etc/passwd
+    then
+        useradd -r -s /bin/false $user
+    else
+        echo "$user user already exists"
+    fi
+done
+check
+}
 check_old_base () {
 if [ -f $1 ] || [ -d $1 ];
 then
@@ -88,8 +79,6 @@ check
 
 # MySQL setup script
 mysql_setup() {
-check_group
-check_user
 check_mysqlpath
 cd /usr/local/src
 [ ! -f mysql-5.6.30-linux-glibc2.5-x86_64.tar.gz ] && wget http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.30-linux-glibc2.5-x86_64.tar.gz
@@ -118,15 +107,37 @@ tar -xzvf php-5.6.21.tar.gz && cd php-5.6.21
 ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-mysql=/usr/local/mysql --with-mysql-sock=/tmp/mysql.sock --enable-fpm --with-fpm-user=php-fpm --with-fpm-group=php-fpm --with-bz2 --with-libxml-dir --with-gd --with-jpeg-dir --with-png-dir --with-freetype-dir --with-iconv-dir --with-zlib-dir --with-mcrypt --with-curl --with-openssl --with-pear --enable-exif --enable-gd-native-ttf --enable-mbstring --enable-soap --enable-sockets
 make && make install
 cp php.ini-production /usr/local/php/etc/php.ini
+# cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf
+curl https://raw.githubusercontent.com/cxuuu/LNMP/master/src/php-fpm.conf -o /usr/local/php/etc/php-fpm.conf
+mkdir /usr/local/php/logs
+cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
+chmod a+x /etc/init.d/php-fpm
+chkconfig --add php-fpm
 check
 }
+
+# nginx setup
+nginx_setup() {
+cd /usr/local/src
+[ ! -f nginx-1.8.1 ] && wget https://nginx.org/download/nginx-1.8.1.tar.gz
+tar -xzvf nginx-1.8.1.tar.gz && cd nginx-1.8.1
+./configure --prefix=/usr/local/nginx --with-http_realip_module --with-http_ssl_module --with-http_sub_module --with-http_gzip_static_module --with-http_stub_status_module --with-pcre
+make && make install
+curl https://raw.githubusercontent.com/cxuuu/LNMP/master/src/nginx -o /etc/init.d/nginx
+chmod a+x /etc/init.d/nginx
+curl https://raw.githubusercontent.com/cxuuu/LNMP/master/src/nginx.conf -o /usr/local/nginx/conf/nginx.conf
+mkdir /usr/local/nginx/vhosts
+chkconfig --add nginx
+check
+}
+
 
 # iptables & selinux
 ip_selinux() {
 iptables-save > /etc/sysconfig/iptables_`date +%s`
 iptables -F
 service iptables save
-if [`getenfore` != "Disabled" ]
+if [ `getenforce` != "Disabled" ]
 then
     setenforce 0
     if ! grep -q SELINUX=disabled  /etc/selinux/config
@@ -141,11 +152,12 @@ read -p "Are you sure that you want to install LAMP:(YES/No) " option
 case $option in
 YES)
     ip_selinux
+    check_user
     check_old
     packages_setup
     mysql_setup
-    apache_setup
     php_setup
+    nginx_setup
     ;;
 *)
     echo "Bye"
