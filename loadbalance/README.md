@@ -11,3 +11,10 @@ least-connected — next request is assigned to the server with the least number
 ip-hash — a hash-function is used to determine what server should be selected for the next request (based on the client’s IP address).
 
 And you can set weight for different real server. The default weight value is 1.
+
+
+
+Usage:
+
+put loadbalancer.conf in distributor machine's /usr/local/nginx/conf/vhosts/
+put the wordpress.com of this src folder on real servers' /usr/local/nginx/conf/vhosts
