@@ -26,6 +26,7 @@ then
 else
     echo -e '#!/bin/bash\nexport PATH=$PATH:/usr/local/mysql/bin' >> /etc/profile.d/PATH.sh
 fi
+source /etc/profile.d/PATH.sh
 check
 }
 
