@@ -14,16 +14,18 @@ And you can set weight for different real server. The default weight value is 1.
 # Usage:
 
 - put loadbalancer.conf in distributor machine's /usr/local/nginx/conf/vhosts/
-- put the wordpress.com of this src folder on real servers' /usr/local/nginx/conf/vhosts
+- put the wordpress.conf of this src folder on real servers' /usr/local/nginx/conf/vhosts
 
 
 # Example:
 
 ## Machines & roles:
-- Distributor: machine A
-- Real server 1: machine B
-- Real server 2: machine C
-- Database(MySQL): machine D
+|Machines|Roles|
+|:--:|:--:|
+|A|Distributor|
+|B|Real server 1 & Source server|
+|C|Real server 2|
+|D|Database(MySQL)|
 
 ## Steps:
 1. Database. Grant priviliges to wordpress MySQL user @ machine B & C.
