@@ -24,6 +24,7 @@ And you can set weight for different real server. The default weight value is 1.
 - Real server 1: machine B
 - Real server 2: machine C
 - Database(MySQL): machine D
+
 ## Steps:
 1. Database. Grant priviliges to wordpress MySQL user @ machine B & C.
 2. Storage.
