@@ -9,12 +9,12 @@ I use a router to provide network,
 And use virtual machines on my computer by VirtualBox
 1. Machines & Roles
 |Machine|Role|Note|
-|:-:|:-:|:-:|
+|:--:|:--:|:--:|
 |one|master server||
 |two|backup server|after one's down, two works|
 2. Machines & IP
 |Machine|Public IP|Internal IP|
-|:-:|:-:|:-:|
+|:--:|:--:|:--:|
 |router|192.168.123.1||
 |host|192.168.123.111||
 |Virtual IP|192.168.123.119|Floating IP|
