@@ -26,7 +26,7 @@ Machines & IP
 |host|192.168.123.111|
 |Virtual IP|192.168.123.119|Floating IP|
 |one|192.168.123.131 eth0|192.168.1.111 eth1|
-|one|192.168.123.132 eth0|192.168.1.112 eth1|
+|two|192.168.123.132 eth0|192.168.1.112 eth1|
 |**Notes**|eth0 provides service|eth1 broadcasts heartbeats over|
 
 Packages
@@ -66,3 +66,24 @@ Packages
 ### Step 3. Testing
 - stop nginx service on one & two
 - start heartbeat service (master first)
+
+
+
+# Normal example
+1. For normal use.
+2. On the base of Nginx load balance.
+
+The distributor distributes and delivers traffic between clients and real server.
+Some work should be done to make sure that the distributor is always avaliable.
+The key thought is that backup distributor starts to work after main distributor's down.
+
+## Preparation
+
+### Step 1. Machines & Roles
+|Machine|Public IP|Private IP(Internal in BirtualBox)|
+|:-:|:-:|:-:|
+|host|192.168.123.111|
+|Virtual IP|192.168.123.119|Floating IP|
+|one|192.168.123.131 eth0|192.168.1.111 eth1|
+|two|192.168.123.132 eth0|192.168.1.112 eth1|
+|**Notes**|eth0 provides service|eth1 broadcasts heartbeats over|
