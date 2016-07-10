@@ -8,6 +8,7 @@ This is a little simple example for for HA configurations.
 
 ### Step 1. Network & machines
 I use a router to provide network.
+
 And use virtual machines on my computer by VirtualBox.
 
 Machines & Roles
