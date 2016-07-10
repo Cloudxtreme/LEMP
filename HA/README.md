@@ -1,6 +1,8 @@
 # For High Avaliable
 Those conf are aimed at setting up High Avaliable for Nginx load balance.
 
+There are conf files in src folder.
+
 # Simple example
 This is a little simple example for for HA configurations.
 
@@ -80,10 +82,26 @@ The key thought is that backup distributor starts to work after main distributor
 ## Preparation
 
 ### Step 1. Machines & Roles
-|Machine|Public IP|Private IP(Internal in BirtualBox)|
-|:-:|:-:|:-:|
-|host|192.168.123.111|
-|Virtual IP|192.168.123.119|Floating IP|
-|one|192.168.123.131 eth0|192.168.1.111 eth1|
-|two|192.168.123.132 eth0|192.168.1.112 eth1|
-|**Notes**|eth0 provides service|eth1 broadcasts heartbeats over|
+|Machine|Role|Public IP|Private IP(Internal in BirtualBox)|Notes|
+|:-:|:-:|:-:|:-:|:-:|
+|host|for testing|192.168.123.111|
+|Virtual IP|Floating IP|192.168.123.119|
+|one|main distributor|192.168.123.131 eth0|192.168.1.111 eth1|
+|two|real server 1|192.168.123.132 eth0|192.168.1.112 eth1|
+|three|real server 2|192.168.123.133 eth0|192.168.1.113 eth1|
+|four|data server (MySQL)|192.168.123 eth0|192.168.1.114 eth1|**backup distributor**|
+
+### Step 2. Packages
+* check epel
+* check LNMP
+* install heartbeat libnet
+
+### Step 3. Configurations
+1. Configurations of Nginx on one & four are the same. Set up load balance.
+2. set up heartbeat on one & four (almost same as the sample version above)
+
+### Step 4. Testing
+1. add "192.168.123.119 1024.com www.1024.com" to /etc/hosts on host computer
+2. browse 1024.com on host.
+3. stop machine one & go on
+4. stop heartbeat on one & go on
