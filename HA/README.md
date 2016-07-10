@@ -35,7 +35,9 @@ Packages
 
 - yum install epel-release
 - yum install heartbeat libnet
-- Nginx has set up both on one and two (**make sure** There is nginx in /etc/init.d)
+- Nginx has set up both on one and two
+- (**make sure** There is nginx in /etc/init.d)
+- [Nginx setup script](https://github.com/cxuuu/LNMP/tree/master/scripts)  and [conf files](https://github.com/cxuuu/LNMP/tree/master/src)
 
 ### Step 2. Configurations
 1. master server (machine one)
@@ -73,7 +75,7 @@ Packages
 
 # Normal example
 1. For normal use.
-2. On the base of Nginx load balance.
+2. On the base of [Nginx load balance](https://github.com/cxuuu/LNMP/tree/master/loadbalance).
 
 The distributor distributes and delivers traffic between clients and real server.
 Some work should be done to make sure that the distributor is always avaliable.
