@@ -94,7 +94,7 @@ The key thought is that backup distributor starts to work after main distributor
 |one|main distributor|192.168.123.131 eth0|192.168.1.111 eth1|
 |two|real server 1|192.168.123.132 eth0|192.168.1.112 eth1|
 |three|real server 2|192.168.123.133 eth0|192.168.1.113 eth1|
-|four|data server (MySQL)|192.168.123 eth0|192.168.1.114 eth1|**backup distributor**|
+|four|data server (MySQL)|192.168.123.134 eth0|192.168.1.114 eth1|**backup distributor**|
 
 ### Step 2. Packages
 * check epel
