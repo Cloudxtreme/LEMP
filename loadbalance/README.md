@@ -32,8 +32,8 @@ And you can set weight for different real server. The default weight value is 1.
 2. Storage.
     - Yum install nfs-utils both on machine B & C.
     - Tar wordpress.tar.gz to B:/var/www/wordpress
-    - vim /etc/exports on expose machine two's WordPress folder to three.
-    - mount -t nfs -o nfsvers=3 B:/path /path (maybe you should write this mount command to /etc/rc.local)
+    - vim /etc/exports on expose machine B's WordPress folder to C.
+    - ON C, mount -t nfs -o nfsvers=3 B:/path /path (maybe you should write this mount command to /etc/rc.local)
     - chkconfig nfs on
 3. Check.
     - Both B and C can access the wordpress folder (which is on machine B)
