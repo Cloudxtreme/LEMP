@@ -109,7 +109,7 @@ tar -xzvf php-5.6.21.tar.gz && cd php-5.6.21
 make && make install
 cp php.ini-production /usr/local/php/etc/php.ini
 # cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf
-curl https://raw.githubusercontent.com/cxuuu/LNMP/master/src/php-fpm.conf -o /usr/local/php/etc/php-fpm.conf
+curl https://raw.githubusercontent.com/cxuuu/LEMP/master/src/php-fpm.conf -o /usr/local/php/etc/php-fpm.conf
 mkdir /usr/local/php/logs
 cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
 chmod a+x /etc/init.d/php-fpm
@@ -124,12 +124,12 @@ cd /usr/local/src
 tar -xzvf nginx-1.8.1.tar.gz && cd nginx-1.8.1
 ./configure --prefix=/usr/local/nginx --with-http_realip_module --with-http_ssl_module --with-http_sub_module --with-http_gzip_static_module --with-http_stub_status_module --with-pcre
 make && make install
-curl https://raw.githubusercontent.com/cxuuu/LNMP/master/src/nginx -o /etc/init.d/nginx
+curl https://raw.githubusercontent.com/cxuuu/LEMP/master/src/nginx -o /etc/init.d/nginx
 chmod a+x /etc/init.d/nginx
-curl https://raw.githubusercontent.com/cxuuu/LNMP/master/src/nginx.conf -o /usr/local/nginx/conf/nginx.conf
+curl https://raw.githubusercontent.com/cxuuu/LEMP/master/src/nginx.conf -o /usr/local/nginx/conf/nginx.conf
 echo -e "<?php\nphpinfo();\n?>" > /usr/local/nginx/html/index.php
 mkdir /usr/local/nginx/conf/vhosts
-# curl https://raw.githubusercontent.com/cxuuu/LNMP/master/src/wordpress.conf -o /usr/local/nginx/conf/vhosts/wordpress.conf
+# curl https://raw.githubusercontent.com/cxuuu/LEMP/master/src/wordpress.conf -o /usr/local/nginx/conf/vhosts/wordpress.conf
 chkconfig --add nginx
 check
 }

@@ -1,8 +1,8 @@
-# LNMP
-shell scripts for LNMP
+# LEMP
+shell scripts for LEMP
 
-This scritpt is used to setup LNMP on Vultr VPS CentOS 6.8(final) x86_64.
+This scritpt is used to setup LEMP on Vultr VPS CentOS 6.8(final) x86_64.
 
 ATTENTION:
-Only lnmp.sh has been tested on Vultr VPS CentOS 6.8(final) x86_64.
+Only lemp.sh has been tested on Vultr VPS CentOS 6.8(final) x86_64.
 And there some conf file in src folder
